@@ -2,6 +2,8 @@ package main
 
 import (
     "database/sql"
+	"encoding/json"
+	"strconv"
     "fmt"
     "log"
     "net/http"
@@ -200,6 +202,12 @@ func deleteUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// Initialize your database connection and routing here
+
+	// Example route for creating a user
+
+	// Start the server
+
     initDB()
 
     r := mux.NewRouter()
