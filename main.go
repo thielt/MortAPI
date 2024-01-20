@@ -1,47 +1,53 @@
 package main
 
 import (
-    "database/sql"
-    "fmt"
-    "log"
-    "net/http"
-    "github.com/gorilla/mux"
-    _ "github.com/mattn/go-sqlite3"
+	"database/sql"
+	// "database/sqlite"
+	"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
+	_ "github.com/mattn/go-sqlite3"
+	"log"
+	"net/http"
+	"strconv"
 )
 
 var db *sql.DB
 
 func initDB() {
-    var err error
-    db, err = sql.Open("sqlite3", "./sql/users.db")
-    if err != nil {
-        log.Fatal(err)
-    }
+	var err error
+	db, err = sql.Open("sqlite3", "./sql/users.db")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    // Create users table if not exists
-    _, err = db.Exec(`
+	// Create users table if not exists
+	_, err = db.Exec(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            email TEXT NOT NULL
+            email TEXT NOT NULL,
+			password TEXT NOT NULL
         );
     `)
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // User struct represents a user entity.
 type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
-	
+
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the request body into a User struct
 	var newUser User
 	err := json.NewDecoder(r.Body).Decode(&newUser)
+	// fmt.println("test")
 	if err != nil {
 		http.Error(w, "Failed to decode request body", http.StatusBadRequest)
 		return
@@ -118,7 +124,7 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateUserHandler(w http.ResponseWriter, r *http.Request) {
-    // Extract the user ID from the request parameters
+	// Extract the user ID from the request parameters
 	params := mux.Vars(r)
 	userIDStr, ok := params["id"]
 	if !ok {
@@ -167,7 +173,7 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteUserHandler(w http.ResponseWriter, r *http.Request) {
-    // Extract the user ID from the request parameters
+	// Extract the user ID from the request parameters
 	params := mux.Vars(r)
 	userIDStr, ok := params["id"]
 	if !ok {
@@ -200,15 +206,21 @@ func deleteUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    initDB()
+	// Initialize your database connection and routing here
 
-    r := mux.NewRouter()
-    r.HandleFunc("/users", createUserHandler).Methods("POST")
-    r.HandleFunc("/users/{id:[0-9]+}", getUserHandler).Methods("GET")
-    r.HandleFunc("/users/{id:[0-9]+}", updateUserHandler).Methods("PUT")
-    r.HandleFunc("/users/{id:[0-9]+}", deleteUserHandler).Methods("DELETE")
+	// Example route for creating a user
 
-    port := 8080
-    log.Printf("Server started on :%d\n", port)
-    log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
+	// Start the server
+
+	initDB()
+
+	r := mux.NewRouter()
+	r.HandleFunc("/users", createUserHandler).Methods("POST")
+	r.HandleFunc("/users/{id:[0-9]+}", getUserHandler).Methods("GET")
+	r.HandleFunc("/users/{id:[0-9]+}", updateUserHandler).Methods("PUT")
+	r.HandleFunc("/users/{id:[0-9]+}", deleteUserHandler).Methods("DELETE")
+
+	port := 8080
+	log.Printf("Server started on :%d\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
 }
