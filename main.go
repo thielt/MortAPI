@@ -2,6 +2,7 @@ package main
 
 import (
     "database/sql"
+	// "database/sqlite"
 	"encoding/json"
 	"strconv"
     "fmt"
@@ -25,7 +26,8 @@ func initDB() {
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            email TEXT NOT NULL
+            email TEXT NOT NULL,
+			password TEXT NOT NULL
         );
     `)
     if err != nil {
@@ -38,12 +40,14 @@ type User struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
 	Email string `json:"email"`
+	Password string `json:"password"`
 }
-	
+
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the request body into a User struct
 	var newUser User
 	err := json.NewDecoder(r.Body).Decode(&newUser)
+	// fmt.println("test")
 	if err != nil {
 		http.Error(w, "Failed to decode request body", http.StatusBadRequest)
 		return
