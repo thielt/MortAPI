@@ -1,28 +1,28 @@
 package main
 
 import (
-    "database/sql"
+	"database/sql"
 	// "database/sqlite"
 	"encoding/json"
+	"fmt"
+	"github.com/gorilla/mux"
+	_ "github.com/mattn/go-sqlite3"
+	"log"
+	"net/http"
 	"strconv"
-    "fmt"
-    "log"
-    "net/http"
-    "github.com/gorilla/mux"
-    _ "github.com/mattn/go-sqlite3"
 )
 
 var db *sql.DB
 
 func initDB() {
-    var err error
-    db, err = sql.Open("sqlite3", "./sql/users.db")
-    if err != nil {
-        log.Fatal(err)
-    }
+	var err error
+	db, err = sql.Open("sqlite3", "./sql/users.db")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    // Create users table if not exists
-    _, err = db.Exec(`
+	// Create users table if not exists
+	_, err = db.Exec(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -30,16 +30,16 @@ func initDB() {
 			password TEXT NOT NULL
         );
     `)
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // User struct represents a user entity.
 type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
@@ -124,7 +124,7 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateUserHandler(w http.ResponseWriter, r *http.Request) {
-    // Extract the user ID from the request parameters
+	// Extract the user ID from the request parameters
 	params := mux.Vars(r)
 	userIDStr, ok := params["id"]
 	if !ok {
@@ -173,7 +173,7 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteUserHandler(w http.ResponseWriter, r *http.Request) {
-    // Extract the user ID from the request parameters
+	// Extract the user ID from the request parameters
 	params := mux.Vars(r)
 	userIDStr, ok := params["id"]
 	if !ok {
@@ -212,15 +212,15 @@ func main() {
 
 	// Start the server
 
-    initDB()
+	initDB()
 
-    r := mux.NewRouter()
-    r.HandleFunc("/users", createUserHandler).Methods("POST")
-    r.HandleFunc("/users/{id:[0-9]+}", getUserHandler).Methods("GET")
-    r.HandleFunc("/users/{id:[0-9]+}", updateUserHandler).Methods("PUT")
-    r.HandleFunc("/users/{id:[0-9]+}", deleteUserHandler).Methods("DELETE")
+	r := mux.NewRouter()
+	r.HandleFunc("/users", createUserHandler).Methods("POST")
+	r.HandleFunc("/users/{id:[0-9]+}", getUserHandler).Methods("GET")
+	r.HandleFunc("/users/{id:[0-9]+}", updateUserHandler).Methods("PUT")
+	r.HandleFunc("/users/{id:[0-9]+}", deleteUserHandler).Methods("DELETE")
 
-    port := 8080
-    log.Printf("Server started on :%d\n", port)
-    log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
+	port := 8080
+	log.Printf("Server started on :%d\n", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
 }
