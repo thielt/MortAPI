@@ -5,11 +5,12 @@ import (
 	// "database/sqlite"
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var db *sql.DB
@@ -99,7 +100,7 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Query the database to retrieve the user
 	var user User
-	err = db.QueryRow("SELECT id, name, email FROM users WHERE id = ?", userID).Scan(&user.ID, &user.Name, &user.Email)
+	err = db.QueryRow("SELECT id, name, email, password FROM users WHERE id = ?", userID).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
 	if err == sql.ErrNoRows {
 		http.Error(w, "User not found", http.StatusNotFound)
 		return

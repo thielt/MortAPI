@@ -22,3 +22,5 @@ sqlite3 users.db
 > .exit to exit sqlite3 and back to the main terminal 
 
 cd .. back to root dir
+
+Install Go debugger extension if not wanting to use the terminal.
