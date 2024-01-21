@@ -3,7 +3,10 @@
 ## Installation(Windows Machine)
 
 Make sure you have [msys2 GNU](https://www.msys2.org/) installed.
-Make sure its in your systems PATH. This is for Go's use of the C-compiler "gcc".
+
+Make sure its in your systems PATH. 
+
+This is for Go's use of the C-compiler "gcc".
 
 To start the application and build the users.db table:
 
@@ -12,6 +15,8 @@ go run main.go
 ```
 
 Or install vscode's golang debugger extension (`f5`)
+
+## sqlite3
 
 For the database, use [sqlite3](https://www.sqlite.org/download.html).
 
