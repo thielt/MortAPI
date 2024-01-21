@@ -2,14 +2,14 @@ package main
 
 import (
 	"database/sql"
-	// "database/sqlite"
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var db *sql.DB
@@ -21,7 +21,7 @@ func initDB() {
 		log.Fatal(err)
 	}
 
-	// Create users table if not exists
+	// Create Users table if none found
 	_, err = db.Exec(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,18 +43,18 @@ type User struct {
 	Password string `json:"password"`
 }
 
+// TODO abstract/clean up
 func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the request body into a User struct
 	var newUser User
 	err := json.NewDecoder(r.Body).Decode(&newUser)
-	// fmt.println("test")
 	if err != nil {
 		http.Error(w, "Failed to decode request body", http.StatusBadRequest)
 		return
 	}
 
 	// Insert the new user into the database
-	result, err := db.Exec("INSERT INTO users (name, email) VALUES (?, ?)", newUser.Name, newUser.Email)
+	result, err := db.Exec("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", newUser.Name, newUser.Email, newUser.Password)
 	if err != nil {
 		log.Println("Error inserting user:", err)
 		http.Error(w, "Failed to insert user", http.StatusInternalServerError)
@@ -81,6 +81,7 @@ func createUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(responseJSON)
 }
 
+// TODO abstract/clean up
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
 	// Extract the user ID from the request parameters
 	params := mux.Vars(r)
@@ -99,7 +100,7 @@ func getUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Query the database to retrieve the user
 	var user User
-	err = db.QueryRow("SELECT id, name, email FROM users WHERE id = ?", userID).Scan(&user.ID, &user.Name, &user.Email)
+	err = db.QueryRow("SELECT id, name, email, password FROM users WHERE id = ?", userID).Scan(&user.ID, &user.Name, &user.Email, &user.Password)
 	if err == sql.ErrNoRows {
 		http.Error(w, "User not found", http.StatusNotFound)
 		return
@@ -148,7 +149,7 @@ func updateUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Update the user in the database
-	_, err = db.Exec("UPDATE users SET name = ?, email = ? WHERE id = ?", updatedUser.Name, updatedUser.Email, userID)
+	_, err = db.Exec("UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?", updatedUser.Name, updatedUser.Email, updatedUser.Password, userID)
 	if err != nil {
 		log.Println("Error updating user:", err)
 		http.Error(w, "Failed to update user", http.StatusInternalServerError)
@@ -221,6 +222,6 @@ func main() {
 	r.HandleFunc("/users/{id:[0-9]+}", deleteUserHandler).Methods("DELETE")
 
 	port := 8080
-	log.Printf("Server started on :%d\n", port)
+	log.Printf("Blowin shit up :%d\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
 }
