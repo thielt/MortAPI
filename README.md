@@ -1,24 +1,46 @@
 # MortAPI
 
-On a Window's Machine:
-Ensure that you have the msys2 GNU and that your systems path has the bin file from the msys2 directory for golangs use of the C compiler "gcc".
+## Installation(Windows Machine)
 
-Build go module:
-$env:CGO_ENABLED=1; go build
+We will be using gorilla mux and sqlite3:
 
-To start the application:
+```sh
+go get -u github.com/gorilla/mux
+go get -u github.com/mattn/go-sqlite3
+```
+
+Make sure you have [msys2 GNU](https://www.msys2.org/) installed.
+
+Make sure its in your systems PATH. 
+
+This is for Go's use of the C-compiler "gcc".
+
+To start the application and build the users.db table:
+
+```sh
 go run main.go
+```
 
---Ensure you have also downloaded the executable file of sqlite3 from their website. 
-I will be building a local database so these files will now be readable on your ide.
-sqlite3 can be accessible on your local terminal using the sqlite3 command ONLY in the directory's sql folder
+Or install vscode's golang debugger extension (`f5`)
 
-Commands to access and manipulate a sample table:
-<dir> - go run main.go to build the table
-sqlite3 users.db 
-> .table (to check the table exists)
-> INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'password');
-> SELECT * FROM users; 
-> .exit to exit sqlite3 and back to the main terminal 
+## sqlite3
 
-cd .. back to root dir
+For the database, use [sqlite3](https://www.sqlite.org/download.html).
+
+Sample commands once you're in the sqlite3 terminal:
+
+```sh
+sqlite3 users.db (to start the sql terminal)
+.table (to check the tables that exist)
+.exit (to exit sqlite3 and back to the main terminal)
+```
+
+Basic sql command to insert into the users.db:
+```sh
+INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'password');
+```
+
+When using `.exit` and leaving sql folder back to the root directory:
+```sh
+cd ..
+```
