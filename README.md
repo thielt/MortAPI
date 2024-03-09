@@ -43,4 +43,4 @@ INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'p
 When using `.exit` and leaving sql folder back to the root directory:
 ```sh
 cd ..
-```
+``` 
