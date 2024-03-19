@@ -1,4 +1,5 @@
 # MortAPI
+An API that calculates mortgages based on varying rates and locations
 
 ## Installation(Windows Machine)
 
