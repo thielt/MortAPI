@@ -45,7 +45,11 @@ When using `.exit` and leaving sql folder back to the root directory:
 ```sh
 cd ..
 <<<<<<< HEAD
+<<<<<<< HEAD
 ```
+=======
+``` 
+>>>>>>> 53267546ddcf5993bdd0c4b921df39a025873e68
 =======
 ``` 
 >>>>>>> 53267546ddcf5993bdd0c4b921df39a025873e68
