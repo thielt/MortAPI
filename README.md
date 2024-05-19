@@ -1,5 +1,13 @@
 # MortAPI
+<<<<<<< HEAD
+<<<<<<< HEAD
 An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
+=======
+An API that calculates mortgages based on varying rates and locations
+>>>>>>> 8b3a07f (Update README.md)
+=======
+An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
+>>>>>>> 5326754 (Update README.md)
 
 ## Installation(Windows Machine)
 
