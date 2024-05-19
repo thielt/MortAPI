@@ -1,4 +1,5 @@
 # MortAPI
+An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
 
 ## Installation(Windows Machine)
 
@@ -43,4 +44,8 @@ INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'p
 When using `.exit` and leaving sql folder back to the root directory:
 ```sh
 cd ..
+<<<<<<< HEAD
 ```
+=======
+``` 
+>>>>>>> 53267546ddcf5993bdd0c4b921df39a025873e68
