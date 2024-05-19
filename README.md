@@ -1,6 +1,7 @@
 # MortAPI
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
 =======
 An API that calculates mortgages based on varying rates and locations
@@ -8,6 +9,9 @@ An API that calculates mortgages based on varying rates and locations
 =======
 An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
 >>>>>>> 5326754 (Update README.md)
+=======
+An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
+>>>>>>> d115dba1ba1786fe718782c3ead58564eeaa7a90
 
 ## Installation(Windows Machine)
 
@@ -55,13 +59,21 @@ cd ..
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d115dba1ba1786fe718782c3ead58564eeaa7a90
 ```
 =======
 ``` 
 >>>>>>> 53267546ddcf5993bdd0c4b921df39a025873e68
 =======
+<<<<<<< HEAD
 ```
 >>>>>>> dbc0f0a (cleanup-getUser (#2))
 =======
 ``` 
 >>>>>>> d5a3455 (Update README.md)
+=======
+``` 
+>>>>>>> 53267546ddcf5993bdd0c4b921df39a025873e68
+>>>>>>> d115dba1ba1786fe718782c3ead58564eeaa7a90
