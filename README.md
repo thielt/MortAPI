@@ -38,3 +38,8 @@ When using `.exit` and leaving sql folder back to the root directory:
 ```sh
 cd ..
 ``` 
+
+Testing:
+```sh
+go test
+```
