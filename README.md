@@ -34,7 +34,7 @@ Basic sql command to insert into the users.db:
 INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'password');
 ```
 
-When using `.exit` and leaving sql folder back to the root directory: 
+When using `.exit` and leaving sql folder back to the root directory:
 ```sh
 cd ..
 ``` 
