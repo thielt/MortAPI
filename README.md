@@ -19,7 +19,7 @@ Or install vscode's golang debugger extension (`f5`)
 
 ## sqlite3
 
-For the database, use [sqlite3](https://www.sqlite.org/download.html).
+For the database, use [sqlite3](https://www.sqlite.org/download.html). 
 
 Sample commands once you're in the sqlite3 terminal:
 
