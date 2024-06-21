@@ -31,7 +31,7 @@ sqlite3 users.db (to start the sql terminal)
 
 Basic sql command to insert into the users.db:
 ```sh
-INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'password');
+INSERT INTO users (name, email, password) VALUES ('Thiel', 'thiel@gmail.com', 'password'); 
 ```
 
 When using `.exit` and leaving sql folder back to the root directory:
