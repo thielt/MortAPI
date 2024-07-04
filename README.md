@@ -4,7 +4,7 @@ An API that calculates mortgages based on varying rates and locations(not sure w
 ## Installation(Windows Machine)
  
 Make sure you have [msys2 GNU](https://www.msys2.org/) installed.
-
+ 
 Make sure its in your systems PATH. 
 
 This is for Go's use of the C-compiler "gcc".
