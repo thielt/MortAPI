@@ -2,7 +2,7 @@
 An API that calculates mortgages based on varying rates and locations(not sure what else we're adding in this)
 
 ## Installation(Windows Machine)
-
+ 
 Make sure you have [msys2 GNU](https://www.msys2.org/) installed.
 
 Make sure its in your systems PATH. 
