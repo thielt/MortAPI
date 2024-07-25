@@ -27,7 +27,7 @@ Sample commands once you're in the sqlite3 terminal:
 sqlite3 users.db (to start the sql terminal)
 .table (to check the tables that exist)
 .exit (to exit sqlite3 and back to the main terminal)
-```
+``` 
 
 Basic sql command to insert into the users.db:
 ```sh
