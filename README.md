@@ -9,7 +9,7 @@ Make sure its in your systems PATH.
 
 This is for Go's use of the C-compiler "gcc".
 
-To start the application and build the users.db table:
+To start the application and build the users.db table: 
 
 ```sh
 go run main.go
