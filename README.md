@@ -39,3 +39,4 @@ When using `.exit` and leaving sql folder back to the root directory:
 cd ..
 ``` 
  
+ 
