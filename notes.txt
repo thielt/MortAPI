@@ -1,0 +1,190 @@
+. Profile Struct
+
+Purpose: To store and manage detailed user profiles beyond basic login information.
+
+go
+
+type Profile struct {
+    ID          string `json:"id"`          // Unique identifier for the profile
+    UserID      string `json:"user_id"`      // Foreign key to the User struct
+    Name        string `json:"name"`         // User's name
+    Bio         string `json:"bio"`          // Short bio or description
+    DateOfBirth time.Time `json:"date_of_birth"` // User's date of birth
+    Gender      string `json:"gender"`       // User's gender
+    Preferences string `json:"preferences"` // User's dating preferences
+    // Add more fields as necessary (e.g., profile picture URL, location)
+}
+
+2. Match Struct
+
+Purpose: To represent a match between two users.
+
+go
+
+type Match struct {
+    ID        string    `json:"id"`        // Unique identifier for the match
+    UserID1   string    `json:"user_id_1"` // ID of the first user
+    UserID2   string    `json:"user_id_2"` // ID of the second user
+    MatchedAt time.Time `json:"matched_at"` // Timestamp of when the match occurred
+}
+
+3. Message Struct
+
+Purpose: To handle communication between matched users.
+
+go
+
+type Message struct {
+    ID        string    `json:"id"`        // Unique identifier for the message
+    MatchID   string    `json:"match_id"`  // ID of the match associated with this message
+    SenderID  string    `json:"sender_id"` // ID of the user who sent the message
+    Content   string    `json:"content"`   // Message content
+    SentAt    time.Time `json:"sent_at"`   // Timestamp of when the message was sent
+}
+
+4. Like Struct
+
+Purpose: To represent user interactions like "likes" or "favorites."
+
+go
+
+type Like struct {
+    ID        string    `json:"id"`        // Unique identifier for the like
+    LikerID   string    `json:"liker_id"`  // ID of the user who liked another user
+    LikedID   string    `json:"liked_id"`  // ID of the user who was liked
+    LikedAt   time.Time `json:"liked_at"`  // Timestamp of when the like occurred
+}
+
+5. Notification Struct
+
+Purpose: To notify users of important events (e.g., new messages, matches).
+
+go
+
+type Notification struct {
+    ID          string    `json:"id"`          // Unique identifier for the notification
+    UserID      string    `json:"user_id"`      // ID of the user who receives the notification
+    Type        string    `json:"type"`        // Type of notification (e.g., "new_message", "match")
+    Content     string    `json:"content"`     // Content of the notification
+    Read        bool      `json:"read"`        // Flag to check if the notification has been read
+    CreatedAt   time.Time `json:"created_at"`  // Timestamp of when the notification was created
+}
+
+. UserSettings Struct
+
+Purpose: To manage user preferences and settings.
+
+go
+
+type UserSettings struct {
+    ID              string `json:"id"`              // Unique identifier for the settings
+    UserID          string `json:"user_id"`          // ID of the user these settings belong to
+    NotificationEnabled bool `json:"notification_enabled"` // Whether notifications are enabled
+    DarkMode        bool   `json:"dark_mode"`        // Dark mode preference
+    DistanceFilter  int    `json:"distance_filter"`  // Distance filter for potential matches
+    AgeRange        [2]int `json:"age_range"`        // Age range for potential matches
+}
+
+2. Report Struct
+
+Purpose: To handle user-generated reports about inappropriate behavior or content.
+
+go
+
+type Report struct {
+    ID        string    `json:"id"`        // Unique identifier for the report
+    ReporterID string    `json:"reporter_id"` // ID of the user who made the report
+    ReportedID string    `json:"reported_id"` // ID of the user being reported
+    Reason    string    `json:"reason"`    // Reason for the report
+    Details   string    `json:"details"`   // Additional details or comments
+    CreatedAt time.Time `json:"created_at"` // Timestamp of when the report was created
+}
+
+3. Photo Struct
+
+Purpose: To manage user profile photos.
+
+go
+
+type Photo struct {
+    ID        string    `json:"id"`        // Unique identifier for the photo
+    UserID    string    `json:"user_id"`    // ID of the user to whom the photo belongs
+    URL       string    `json:"url"`       // URL of the photo
+    UploadedAt time.Time `json:"uploaded_at"` // Timestamp of when the photo was uploaded
+    IsProfile bool      `json:"is_profile"` // Flag to indicate if this is the profile photo
+}
+
+4. Event Struct
+
+Purpose: To track events like user logins, app usage, or special promotions.
+
+go
+
+type Event struct {
+    ID        string    `json:"id"`        // Unique identifier for the event
+    UserID    string    `json:"user_id"`    // ID of the user associated with the event
+    Type      string    `json:"type"`      // Type of event (e.g., "login", "profile_update")
+    Data      string    `json:"data"`      // Additional data related to the event
+    CreatedAt time.Time `json:"created_at"` // Timestamp of when the event occurred
+}
+
+5. Subscription Struct
+
+Purpose: To manage subscription plans or in-app purchases.
+
+go
+
+type Subscription struct {
+    ID        string    `json:"id"`        // Unique identifier for the subscription
+    UserID    string    `json:"user_id"`    // ID of the user who has the subscription
+    Plan      string    `json:"plan"`      // Subscription plan name (e.g., "premium", "gold")
+    StartDate time.Time `json:"start_date"` // Subscription start date
+    EndDate   time.Time `json:"end_date"`   // Subscription end date
+    Active    bool      `json:"active"`    // Whether the subscription is currently active
+    ID          string    `json:"id"`          // Unique identifier for the plan
+    Name        string    `json:"name"`        // Name of the plan (e.g., "Basic", "Premium")
+    Description string    `json:"description"` // Description of the plan's features
+    Price       float64   `json:"price"`       // Price of the plan
+    Duration    string    `json:"duration"`    // Duration of the plan (e.g., "1 month", "1 year")
+}
+
+6. Location Struct
+
+Purpose: To handle user location data for matching based on geographical proximity.
+
+go
+
+type Location struct {
+    ID        string    `json:"id"`        // Unique identifier for the location
+    UserID    string    `json:"user_id"`    // ID of the user associated with this location
+    Latitude  float64   `json:"latitude"`   // Latitude of the user's location
+    Longitude float64   `json:"longitude"`  // Longitude of the user's location
+    UpdatedAt time.Time `json:"updated_at"` // Timestamp of when the location was last updated
+}
+
+7. ChatRoom Struct
+
+Purpose: To manage group chats or ongoing conversations beyond direct messages.
+
+go
+
+type ChatRoom struct {
+    ID        string    `json:"id"`        // Unique identifier for the chat room
+    Name      string    `json:"name"`      // Name or description of the chat room
+    UserIDs   []string  `json:"user_ids"`  // List of user IDs participating in the chat room
+    CreatedAt time.Time `json:"created_at"` // Timestamp of when the chat room was created
+}
+
+8. ActivityLog Struct
+
+Purpose: To keep track of user activities and interactions within the app.
+
+go
+
+type ActivityLog struct {
+    ID        string    `json:"id"`        // Unique identifier for the activity log
+    UserID    string    `json:"user_id"`    // ID of the user associated with the activity
+    Action    string    `json:"action"`    // Description of the action (e.g., "viewed_profile", "liked_photo")
+    TargetID  string    `json:"target_id"`  // ID of the target entity (e.g., profile ID)
+    Timestamp time.Time `json:"timestamp"` // Timestamp of when the activity occurred
+}
